@@ -33,8 +33,17 @@ export interface PendingDriverRow {
   id: string
   firstName: string
   lastName: string
+  email: string
+  phoneNumber: string
   profilePhotoUrl: string | null
+  vehicleMake: string | null
+  vehicleModel: string | null
+  vehicleYear: number | null
   vehicleClass: VehicleClass
+  licensePlate: string | null
+  driversLicenseUrl: string | null
+  vehicleRegistrationUrl: string | null
+  insuranceCertificateUrl: string | null
   createdAt: string
 }
 
