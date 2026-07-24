@@ -1,4 +1,4 @@
-import { Car, ClipboardList, DollarSign, ShoppingBag, UserCheck, Users } from 'lucide-react'
+import { Banknote, Car, ClipboardList, ShoppingBag, UserCheck, Users } from 'lucide-react'
 import type { ComponentType } from 'react'
 import Card from '../../../components/ui/Card'
 import Skeleton from '../../../components/ui/Skeleton'
@@ -79,7 +79,7 @@ export default function KpiCards({ stats, isLoading, error }: KpiCardsProps) {
     },
     {
       label: 'Total Revenue',
-      icon: DollarSign,
+      icon: Banknote,
       iconClass: 'bg-success/10 text-success',
       value: formatCompactCurrency(stats.totalRevenueThisMonth),
       subtitle: 'Gross this month',

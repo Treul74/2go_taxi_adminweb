@@ -5,6 +5,7 @@ interface PaginationProps {
   pageSize: number
   total: number
   onPageChange: (page: number) => void
+  itemLabel?: string
 }
 
 function buildPageNumbers(current: number, pageCount: number): number[] {
@@ -15,7 +16,7 @@ function buildPageNumbers(current: number, pageCount: number): number[] {
   return pages
 }
 
-export default function Pagination({ page, pageSize, total, onPageChange }: PaginationProps) {
+export default function Pagination({ page, pageSize, total, onPageChange, itemLabel = 'orders' }: PaginationProps) {
   const pageCount = Math.max(1, Math.ceil(total / pageSize))
   const from = total === 0 ? 0 : (page - 1) * pageSize + 1
   const to = Math.min(total, page * pageSize)
@@ -23,7 +24,7 @@ export default function Pagination({ page, pageSize, total, onPageChange }: Pagi
   return (
     <div className="flex items-center justify-between border-t border-gray-100 pt-4">
       <p className="text-sm text-muted">
-        Showing {from} to {to} of {total.toLocaleString('en-US')} orders
+        Showing {from} to {to} of {total.toLocaleString('en-US')} {itemLabel}
       </p>
 
       <div className="flex items-center gap-1.5">

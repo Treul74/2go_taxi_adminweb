@@ -1,6 +1,7 @@
 interface TabItem<T extends string> {
   value: T
   label: string
+  badge?: number
 }
 
 interface TabsProps<T extends string> {
@@ -17,13 +18,16 @@ export default function Tabs<T extends string>({ items, value, onChange }: TabsP
           key={item.value}
           type="button"
           onClick={() => onChange(item.value)}
-          className={`border-0 border-b-2 bg-transparent px-1 pb-3 text-sm font-semibold transition ${
+          className={`flex items-center gap-2 border-0 border-b-2 bg-transparent px-1 pb-3 text-sm font-semibold transition ${
             value === item.value
               ? 'border-accent text-accent'
               : 'border-transparent text-muted hover:text-primary'
           }`}
         >
           {item.label}
+          {item.badge != null && item.badge > 0 && (
+            <span className="rounded-full bg-accent/10 px-2 py-0.5 text-xs font-bold text-accent">{item.badge}</span>
+          )}
         </button>
       ))}
     </div>

@@ -3,16 +3,16 @@ export function formatNumber(value: number) {
 }
 
 export function formatCompactCurrency(value: number) {
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('en-ZM', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'ZMW',
     notation: 'compact',
     maximumFractionDigits: 1,
   }).format(value)
 }
 
 export function formatCurrency(value: number) {
-  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value)
+  return new Intl.NumberFormat('en-ZM', { style: 'currency', currency: 'ZMW' }).format(value)
 }
 
 export function formatPct(value: number) {
