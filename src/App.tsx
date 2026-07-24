@@ -2,8 +2,13 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Login from './features/auth/Login'
 import CreateAccount from './features/auth/CreateAccount'
 import ForgotPassword from './features/auth/ForgotPassword'
+import Customers from './features/customers/Customers'
 import Dashboard from './features/dashboard/Dashboard'
+import Drivers from './features/drivers/Drivers'
+import FareConfiguration from './features/fares/FareConfiguration'
 import Orders from './features/orders/Orders'
+import ServiceAreas from './features/service-areas/ServiceAreas'
+import VehicleClasses from './features/vehicles/VehicleClasses'
 import './styles/tailwind.css'
 
 function App() {
@@ -15,6 +20,11 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="/customers" element={<Customers />} />
+        <Route path="/drivers" element={<Drivers />} />
+        <Route path="/vehicle-classes" element={<VehicleClasses />} />
+        <Route path="/fare-configuration" element={<FareConfiguration />} />
+        <Route path="/service-areas" element={<ServiceAreas />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

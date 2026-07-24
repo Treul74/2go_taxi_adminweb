@@ -158,7 +158,9 @@ export async function fetchRevenueSeries(range: RevenueRange): Promise<RevenuePo
 export async function fetchPendingDrivers(limit = 5): Promise<PendingDriverRow[]> {
   const { data, error } = await insforge.database
     .from('drivers')
-    .select('id, first_name, last_name, profile_photo_url, vehicle_class, created_at')
+    .select(
+      'id, first_name, last_name, email, phone_number, profile_photo_url, vehicle_make, vehicle_model, vehicle_year, vehicle_class, license_plate, drivers_license_url, vehicle_registration_url, insurance_certificate_url, created_at',
+    )
     .eq('account_status', 'pending')
     .order('created_at', { ascending: false })
     .limit(limit)
@@ -168,8 +170,17 @@ export async function fetchPendingDrivers(limit = 5): Promise<PendingDriverRow[]
     id: row.id,
     firstName: row.first_name,
     lastName: row.last_name,
+    email: row.email,
+    phoneNumber: row.phone_number,
     profilePhotoUrl: row.profile_photo_url,
+    vehicleMake: row.vehicle_make,
+    vehicleModel: row.vehicle_model,
+    vehicleYear: row.vehicle_year,
     vehicleClass: row.vehicle_class,
+    licensePlate: row.license_plate,
+    driversLicenseUrl: row.drivers_license_url,
+    vehicleRegistrationUrl: row.vehicle_registration_url,
+    insuranceCertificateUrl: row.insurance_certificate_url,
     createdAt: row.created_at,
   }))
 }

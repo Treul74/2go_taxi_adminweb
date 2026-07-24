@@ -1,6 +1,7 @@
-export type OrderStatus = 'pending' | 'accepted' | 'in_progress' | 'completed' | 'cancelled'
-export type OrderTab = 'pending' | 'active' | 'completed' | 'cancelled' | 'history'
-export type OrderSortColumn = 'created_at' | 'fare_amount'
+export type OrderStatus = 'pending' | 'accepted' | 'in_progress' | 'completed' | 'cancelled' | 'expired'
+export type OrderTab = 'all' | 'pending' | 'active' | 'completed' | 'cancelled' | 'history'
+export type OrderVehicleType = 'economy' | 'comfort' | 'bike' | 'tricycle' | 'truck'
+export type OrderSortColumn = 'order_number' | 'created_at' | 'fare_amount'
 export type SortDirection = 'asc' | 'desc'
 
 export interface OrderListRow {
@@ -10,7 +11,8 @@ export interface OrderListRow {
   customerName: string
   customerPhotoUrl: string | null
   driverName: string | null
-  vehicleClass: string | null
+  driverPhotoUrl: string | null
+  vehicleType: OrderVehicleType | null
   vehicleMake: string | null
   vehicleModel: string | null
   fareAmount: number
@@ -24,23 +26,29 @@ export interface OrderDetail extends OrderListRow {
   dropoffAddress: string | null
   dropoffLat: number | null
   dropoffLng: number | null
-  paymentMethod: string | null
   requestedAt: string
+  acceptedAt: string | null
+  driverArrivedAt: string | null
+  tripStartedAt: string | null
   completedAt: string | null
+  cancelledAt: string | null
   baseFare: number
-  serviceFeePct: number
+  distanceFareAmount: number
+  timeFareAmount: number
   serviceFeeAmount: number
-  customerRating: number | null
+  tripDistanceKm: number | null
+  tripDurationMinutes: number | null
+  customerPhone: string | null
+  driverPhone: string | null
+  driverCode: string | null
   driverRating: number | null
   driverLicensePlate: string | null
-  driverCurrentLat: number | null
-  driverCurrentLng: number | null
 }
 
 export interface OrderFilters {
   tab: OrderTab
   search: string
-  vehicleClass: 'all' | 'economy' | 'suv' | 'luxury' | 'sprinter'
+  vehicleType: 'all' | OrderVehicleType
   dateFrom: Date | null
   dateTo: Date | null
   sortBy: OrderSortColumn

@@ -1,19 +1,18 @@
 import { useEffect, useMemo, useState } from 'react'
 import { usePolledQuery } from '../../../hooks/usePolledQuery'
 import { fetchOrders } from '../../../lib/orders'
-import type { OrderFilters, OrderSortColumn, OrderTab, SortDirection } from '../../../types/orders'
+import type { OrderFilters, OrderTab } from '../../../types/orders'
 
 const PAGE_SIZE = 10
 
 export function useOrders() {
-  const [tab, setTab] = useState<OrderTab>('active')
+  const [tab, setTab] = useState<OrderTab>('all')
   const [searchInput, setSearchInput] = useState('')
   const [debouncedSearch, setDebouncedSearch] = useState('')
-  const [vehicleClass, setVehicleClass] = useState<OrderFilters['vehicleClass']>('all')
+  const [vehicleType, setVehicleType] = useState<OrderFilters['vehicleType']>('all')
   const [dateFrom, setDateFrom] = useState<Date | null>(null)
   const [dateTo, setDateTo] = useState<Date | null>(null)
-  const [sortBy, setSortBy] = useState<OrderSortColumn>('created_at')
-  const [sortDirection, setSortDirection] = useState<SortDirection>('desc')
+  const [sortDirection, setSortDirection] = useState<OrderFilters['sortDirection']>('desc')
   const [page, setPage] = useState(1)
 
   useEffect(() => {
@@ -27,10 +26,9 @@ export function useOrders() {
   const filterSignature = JSON.stringify([
     tab,
     debouncedSearch,
-    vehicleClass,
+    vehicleType,
     dateFrom?.getTime() ?? null,
     dateTo?.getTime() ?? null,
-    sortBy,
     sortDirection,
   ])
   const [prevFilterSignature, setPrevFilterSignature] = useState(filterSignature)
@@ -40,28 +38,32 @@ export function useOrders() {
   }
 
   const filters: OrderFilters = useMemo(
-    () => ({ tab, search: debouncedSearch, vehicleClass, dateFrom, dateTo, sortBy, sortDirection, page, pageSize: PAGE_SIZE }),
-    [tab, debouncedSearch, vehicleClass, dateFrom, dateTo, sortBy, sortDirection, page],
+    () => ({
+      tab,
+      search: debouncedSearch,
+      vehicleType,
+      dateFrom,
+      dateTo,
+      sortBy: 'order_number',
+      sortDirection,
+      page,
+      pageSize: PAGE_SIZE,
+    }),
+    [tab, debouncedSearch, vehicleType, dateFrom, dateTo, sortDirection, page],
   )
 
   const { data, isLoading, error, refetch } = usePolledQuery(() => fetchOrders(filters), [
     tab,
     debouncedSearch,
-    vehicleClass,
+    vehicleType,
     dateFrom?.getTime(),
     dateTo?.getTime(),
-    sortBy,
     sortDirection,
     page,
   ])
 
-  function toggleSort(column: OrderSortColumn) {
-    if (sortBy === column) {
-      setSortDirection((prev) => (prev === 'asc' ? 'desc' : 'asc'))
-    } else {
-      setSortBy(column)
-      setSortDirection('desc')
-    }
+  function toggleSort() {
+    setSortDirection((prev) => (prev === 'asc' ? 'desc' : 'asc'))
   }
 
   function setDateRange(from: Date | null, to: Date | null) {
@@ -79,12 +81,11 @@ export function useOrders() {
     setTab,
     searchInput,
     setSearchInput,
-    vehicleClass,
-    setVehicleClass,
+    vehicleType,
+    setVehicleType,
     dateFrom,
     dateTo,
     setDateRange,
-    sortBy,
     sortDirection,
     toggleSort,
     page,
