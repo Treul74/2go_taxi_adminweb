@@ -5,6 +5,7 @@ import Card from '../../components/ui/Card'
 import VehicleClassFormPanel from './components/VehicleClassFormPanel'
 import VehicleClassStatCards from './components/VehicleClassStatCards'
 import VehicleClassTable from './components/VehicleClassTable'
+import VehicleLibraryPanel from './components/VehicleLibraryPanel'
 import { useVehicleClassStats } from './hooks/useVehicleClassStats'
 import { useVehicleClasses } from './hooks/useVehicleClasses'
 import type { VehicleClassRow } from '../../types/vehicleClasses'
@@ -68,6 +69,8 @@ export default function VehicleClasses() {
             />
           </div>
         </Card>
+
+        <VehicleLibraryPanel />
       </div>
 
       <VehicleClassFormPanel
