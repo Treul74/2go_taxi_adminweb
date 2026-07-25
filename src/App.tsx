@@ -7,7 +7,7 @@ import Dashboard from './features/dashboard/Dashboard'
 import Drivers from './features/drivers/Drivers'
 import FareConfiguration from './features/fares/FareConfiguration'
 import Orders from './features/orders/Orders'
-import ServiceAreas from './features/service-areas/ServiceAreas'
+import ServiceAreas from './features/areas/ServiceAreas'
 import VehicleClasses from './features/vehicles/VehicleClasses'
 import './styles/tailwind.css'
 
