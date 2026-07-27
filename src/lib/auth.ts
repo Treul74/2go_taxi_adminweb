@@ -10,6 +10,13 @@ export async function signInWithPassword(email: string, password: string) {
     throw new Error(error.message || 'Invalid email or password.')
   }
 
+  if (data.user.id) {
+    void insforge.database
+      .from('admins')
+      .update({ last_login_at: new Date().toISOString() })
+      .eq('auth_id', data.user.id)
+  }
+
   return data
 }
 

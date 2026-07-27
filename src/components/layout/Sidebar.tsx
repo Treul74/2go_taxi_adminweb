@@ -31,7 +31,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Vehicle Classes', icon: Layers, path: '/vehicle-classes' },
   { label: 'Fare Configuration', icon: SlidersHorizontal, path: '/fare-configuration' },
   { label: 'Service Areas', icon: Map, path: '/service-areas' },
-  { label: 'Managers', icon: ShieldCheck },
+  { label: 'Managers', icon: ShieldCheck, path: '/managers' },
   { label: 'Promotions', icon: Megaphone },
   { label: 'Analytics & Reports', icon: BarChart3 },
   { label: 'Settings', icon: Settings },

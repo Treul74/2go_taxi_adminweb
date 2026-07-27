@@ -1,6 +1,7 @@
 import { CircleDollarSign } from 'lucide-react'
 import Card from '../../../components/ui/Card'
 import FareField from './FareField'
+import Switch from '../../../components/ui/Switch'
 
 export interface FareRateFields {
   baseFare: string
@@ -14,14 +15,27 @@ export interface FareRateFields {
 interface StandardFareRatesCardProps {
   values: FareRateFields
   onChange: (key: keyof FareRateFields, value: string) => void
+  isActive: boolean
+  onActiveChange: (checked: boolean) => void
 }
 
-export default function StandardFareRatesCard({ values, onChange }: StandardFareRatesCardProps) {
+export default function StandardFareRatesCard({
+  values,
+  onChange,
+  isActive,
+  onActiveChange,
+}: StandardFareRatesCardProps) {
   return (
     <Card className="p-6">
-      <div className="mb-5 flex items-center gap-2">
-        <CircleDollarSign className="h-5 w-5 text-accent" />
-        <h2 className="text-lg font-bold text-primary">Standard Fare Rates</h2>
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-2">
+          <CircleDollarSign className="h-5 w-5 text-accent" />
+          <h2 className="text-lg font-bold text-primary">Standard Fare Rates</h2>
+        </div>
+        <div className="flex items-center gap-2.5">
+          <span className="text-sm font-semibold text-slate-500">Active Status</span>
+          <Switch checked={isActive} onChange={onActiveChange} label="Active Status Toggle" />
+        </div>
       </div>
 
       <div className="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">

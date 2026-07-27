@@ -9,6 +9,7 @@ import FareConfiguration from './features/fares/FareConfiguration'
 import Orders from './features/orders/Orders'
 import ServiceAreas from './features/areas/ServiceAreas'
 import VehicleClasses from './features/vehicles/VehicleClasses'
+import Managers from './features/managers/Managers'
 import './styles/tailwind.css'
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/vehicle-classes" element={<VehicleClasses />} />
         <Route path="/fare-configuration" element={<FareConfiguration />} />
         <Route path="/service-areas" element={<ServiceAreas />} />
+        <Route path="/managers" element={<Managers />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
