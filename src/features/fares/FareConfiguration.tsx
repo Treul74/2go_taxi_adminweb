@@ -35,6 +35,7 @@ export default function FareConfiguration() {
   const [platformPct, setPlatformPct] = useState('0')
   const [nightMultiplier, setNightMultiplier] = useState('1')
   const [peakMultiplier, setPeakMultiplier] = useState('1')
+  const [isActive, setIsActive] = useState(true)
   const estimateRef = useRef<HTMLDivElement>(null)
 
   function loadFromConfig() {
@@ -43,6 +44,7 @@ export default function FareConfiguration() {
       setPlatformPct('0')
       setNightMultiplier('1')
       setPeakMultiplier('1')
+      setIsActive(false)
       return
     }
     setFields({
@@ -56,6 +58,7 @@ export default function FareConfiguration() {
     setPlatformPct(String(selectedConfig.platformCommissionPct))
     setNightMultiplier(String(selectedConfig.nightRateMultiplier))
     setPeakMultiplier(String(selectedConfig.peakMultiplier))
+    setIsActive(selectedConfig.isActive)
   }
 
   // Re-sync the form whenever the loaded row for the active class changes
@@ -82,6 +85,7 @@ export default function FareConfiguration() {
       peakMultiplier: Number(peakMultiplier) || 1,
       platformCommissionPct: platformPctNumber,
       driverCommissionPct: driverPctNumber,
+      isActive,
     }
     try {
       await save(input)
@@ -167,7 +171,12 @@ export default function FareConfiguration() {
               <>
                 <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
                   <div className="lg:col-span-2">
-                    <StandardFareRatesCard values={fields} onChange={handleFieldChange} />
+                    <StandardFareRatesCard
+                      values={fields}
+                      onChange={handleFieldChange}
+                      isActive={isActive}
+                      onActiveChange={setIsActive}
+                    />
                   </div>
                   <div className="flex flex-col gap-6">
                     <RevenueSharePanel

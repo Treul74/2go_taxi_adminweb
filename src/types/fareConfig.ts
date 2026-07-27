@@ -27,4 +27,5 @@ export interface FareConfigInput {
   peakMultiplier: number
   platformCommissionPct: number
   driverCommissionPct: number
+  isActive: boolean
 }

@@ -68,6 +68,7 @@ export async function updateFareConfig(vehicleClassId: string, input: FareConfig
       peak_multiplier: input.peakMultiplier,
       platform_commission_pct: input.platformCommissionPct,
       driver_commission_pct: input.driverCommissionPct,
+      is_active: input.isActive,
     })
     .eq('vehicle_class_id', vehicleClassId)
     .select(COLUMNS)
